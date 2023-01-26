@@ -7,5 +7,5 @@ This SDK assists with server-side authentication for Rust applications using [Pa
 Install:
 
 ```
-cargo add passage
+cargo add passage-id
 ```
