@@ -1,7 +1,10 @@
 [package]
-name = "passage"
+name = "passage-id"
+description = "Server SDK for passage.id authentication"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/robyoder/passage-rust/"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
