@@ -4,8 +4,6 @@ use serde::Deserialize;
 
 pub struct Passage {
     app_id: String,
-    #[allow(dead_code)]
-    api_key: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -24,8 +22,8 @@ pub enum AuthError {
 }
 
 impl Passage {
-    pub fn new(app_id: String, api_key: Option<String>) -> Self {
-        Passage { app_id, api_key }
+    pub fn new(app_id: String) -> Self {
+        Passage { app_id }
     }
 
     pub fn authenticate_token(self, token: &str, pub_jwk: &str) -> Result<String, AuthError> {
@@ -60,9 +58,8 @@ mod tests {
 
     #[test]
     fn init_passage() {
-        let passage = Passage::new(String::from("test"), None);
+        let passage = Passage::new(String::from("test"));
         assert_eq!(passage.app_id, String::from("test"));
-        assert_eq!(passage.api_key, None);
     }
 
     #[test]
@@ -79,7 +76,7 @@ mod tests {
 
         let jwt_str = "eyJraWQiOiJyNTB2S3VrSmw0b1ZhVDc4TzBFTElHUzR3OHluTVlfNGxSU0JxLXV2VFg0IiwiYWxnIjoiUlMyNTYiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBhc3NhZ2UuaWQvdjEvYXBwcy9mYWtlIiwiZXhwIjoyMDAwMDAwMDAwfQ.lZ2zTZmJsIcQE2XDV-N8sVFvK2AxN4GWW_fId6yc2uSJFtQc26HcB0ywGn7BjhB8OD4rX3WkA9XqyUl51fKCnVlE8hlk4VlfDyewKahJkPmoqNX7QwDzA9ORd-5FlZJ1_8nsMzH0jn8ydkKJORgxGKfj_xZD73mW9gz31bVbYddPmPcAmhuJCvI_4dlNVmIfEk-UUNmtIJEc89iwbcg_baEUJDXXztUfYhw4M3WC58ptI5GZk9JLIcq5PU59Sn495d14Xeek19PD93ypSwsLRAwXXU6OQgRbFZtYdrshcDpZ3339RfuO6xBlTBqet5BbVMm-f28Mlqw2x2UvuQ_h-g";
 
-        let passage = Passage::new(String::from("fake"), None);
+        let passage = Passage::new(String::from("fake"));
         let res = passage.authenticate_token(jwt_str, jwk_str);
 
         assert_eq!(res, Ok("1234567890".to_owned()));
