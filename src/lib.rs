@@ -1,6 +1,6 @@
 #![warn(missing_docs)]
 //!
-//! This crate provides a library for working with [Passage](https://passage.id), a modern passwordless authentication experience based on Passkeys and magic links. This library currently implements a very small subset of the available Passage API endpoints.
+//! This crate provides a library for working with [Passage](https://passage.id), a modern passwordless authentication experience based on passkeys and magic links. This library currently implements a very small subset of the available Passage API endpoints.
 //!
 //! See Passage [Authentication API](https://docs.passage.id/api-docs/authentication-api) and [Management API](https://docs.passage.id/api-docs/management-api)  for all the possible endpoints that could be added to this crate in the future.
 //!
