@@ -55,7 +55,7 @@ impl Passage {
     /// // Your app id from https://console.passage.id/settings
     /// let app_id = "cHxJnV5eqc8aIrgQjgfIEsMl";
     ///
-    /// // Your app's public jwk key from https://auth.passage.id/v1/apps/{app_id}/.well-known/jwks.json. You only want the itself key, not the array.
+    /// // Your app's public JWK from https://auth.passage.id/v1/apps/{app_id}/.well-known/jwks.json. You only want the key itself, not the array.
     /// let pub_key = r#"{
     ///     "alg": "RS256",
     ///     "kty": "RSA",
