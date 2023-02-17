@@ -33,7 +33,7 @@ pub enum AuthError {
     /// Failed to decode the header of the Passage JWT (e.g. the `psg_auth_token` cookie value). See associated `jwt::errors::Error` for details.
     TokenHeaderDecoding(jwt::errors::Error),
 
-    /// Key ids mismatched between public JWK and Passage auth token
+    /// Key IDs of public JWK and Passage JWT do not match
     KidMismatch(Option<String>, Option<String>),
 
     /// Failed to parse the provided public JWK
