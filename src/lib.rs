@@ -49,7 +49,7 @@ impl Passage {
         Passage { app_id }
     }
 
-    /// Verify the Passage authentication token. When successful, the resulting String is the `passage_id` for the logged in user. See [Validation Passage JWTs](https://docs.passage.id/backend/overview/other#validation-passage-jwts) for details.
+    /// Verify the Passage authentication token. When successful, the resulting `String` is the authenticated Passage user ID. See [Validation Passage JWTs](https://docs.passage.id/backend/overview/other#validation-passage-jwts) for details.
     ///
     /// ```rust
     /// // Your app id from https://console.passage.id/settings
