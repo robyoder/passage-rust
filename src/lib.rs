@@ -30,7 +30,7 @@ struct Claims {
 /// The error type for possible authentication failures when validating a JWT.
 #[derive(Debug, PartialEq)]
 pub enum AuthError {
-    /// Failed to decode the Passage auth token (e.g. the `psg_auth_token` cookie value)
+    /// Failed to decode the header of the Passage JWT (e.g. the `psg_auth_token` cookie value). See associated `jwt::errors::Error` for details.
     TokenHeaderDecoding(jwt::errors::Error),
 
     /// Key ids mismatched between public JWK and Passage auth token
