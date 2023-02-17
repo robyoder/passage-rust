@@ -2,7 +2,7 @@
 
 # Passage SDK for Rust
 
-This crate provides a library for working with [Passage](https://passage.id), a modern passwordless authentication experience based on Passkeys and magic links. This library currently implements a very small subset of the available Passage API endpoints.
+This crate provides a library for working with [Passage](https://passage.id), a modern passwordless authentication experience based on passkeys and magic links. This library currently implements a very small subset of the available Passage API endpoints.
 
 At the moment, this SDK assists with server-side authentication.
 
