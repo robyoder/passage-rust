@@ -1,7 +1,23 @@
+#![warn(missing_docs)]
+//!
+//! This crate provides a library for working with [Passage](https://passage.id), a modern passwordless authentication experience based on Passkeys and magic links. This library currently implements a very small subset of the available Passage API endpoints.
+//!
+//! See Passage [Authentication API](https://docs.passage.id/api-docs/authentication-api) and [Management API](https://docs.passage.id/api-docs/management-api)  for all the possible endpoints that could be added to this crate in the future.
+//!
+//! ## Usage
+//!
+//! This crate is on [crates.io](https://crates.io/crates/passage-id) and can be used by adding `passage` to your dependencies in your project's Cargo.toml.
+//!
+//! ```toml
+//! [dependencies]
+//! passage-id = "latest"
+//! ```
+//!
 use jsonwebkey as jwk;
 use jsonwebtoken as jwt;
 use serde::Deserialize;
 
+/// Passage is the main entry point you'll be working with. Create with [Passage::new].
 pub struct Passage {
     app_id: String,
 }
@@ -11,19 +27,60 @@ struct Claims {
     sub: String,
 }
 
+/// The error type for possible authentication failures when validating a JWT.
 #[derive(Debug, PartialEq)]
 pub enum AuthError {
+    /// Failed to decode the Passage auth token (e.g. the `psg_auth_token` cookie value)
     TokenHeaderDecoding(jwt::errors::Error),
+
+    /// Key ids mismatched between public JWK and Passage auth token
     KidMismatch(Option<String>, Option<String>),
+
+    /// Failed to parse the provided public JWK
     PubKeyParsing(String),
+
+    /// Failed to decode the JWT. See associated `jwt::errors::Error` for details.
     TokenDecoding(jwt::errors::Error),
 }
 
 impl Passage {
+    /// Creates a new [Passage] for interacting with the Passage API. Your `app_id` can be found in the [Passage console](https://console.passage.id).
     pub fn new(app_id: String) -> Self {
         Passage { app_id }
     }
 
+    /// Verify the Passage authentication token. When successful, the resulting String is the `passage_id` for the logged in user. See [Validation Passage JWTs](https://docs.passage.id/backend/overview/other#validation-passage-jwts) for details.
+    ///
+    /// ```rust
+    /// // Your app id from https://console.passage.id/settings
+    /// let app_id = "cHxJnV5eqc8aIrgQjgfIEsMl";
+    ///
+    /// // Your app's public jwk key from https://auth.passage.id/v1/apps/{app_id}/.well-known/jwks.json. You only want the itself key, not the array.
+    /// let pub_key = r#"{
+    ///     "alg": "RS256",
+    ///     "kty": "RSA",
+    ///     "use": "sig",
+    ///     "n": "...",
+    ///     "e": "AQAB",
+    ///     "kid": "..."
+    ///   }"#;
+    ///
+    /// // If you are using an Element, the Passage authentication JWT will be sent to your application via a cookie with the key `psg_auth_token`
+    /// let psg_auth_token = "...";
+    ///
+    /// let passage = Passage::new(String::from(app_id));
+    /// let result = passage.authenticate_token(psg_auth_token, pub_key);
+    ///
+    /// match result {
+    ///     Ok(passage_user_id) => println!(
+    ///         "Passage JWT is valid. passage_user_id=<{}>",
+    ///         passage_user_id
+    ///     ),
+    ///     Err(err) => {
+    ///         println!("Auth error: {:?}", err);
+    ///     }
+    /// }
+    /// ```
     pub fn authenticate_token(self, token: &str, pub_jwk: &str) -> Result<String, AuthError> {
         let key = pub_jwk
             .parse::<jwk::JsonWebKey>()
