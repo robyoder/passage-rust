@@ -39,7 +39,7 @@ pub enum AuthError {
     /// Failed to parse the provided public JWK
     PubKeyParsing(String),
 
-    /// Failed to decode the JWT. See associated `jwt::errors::Error` for details.
+    /// Failed to decode and validate the Passage JWT (e.g. the `psg_auth_token` cookie value). See associated `jwt::errors::Error` for details.
     TokenDecoding(jwt::errors::Error),
 }
 
