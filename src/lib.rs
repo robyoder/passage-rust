@@ -2,15 +2,15 @@
 //!
 //! This crate provides a library for working with [Passage](https://passage.id), a modern passwordless authentication experience based on passkeys and magic links. This library currently implements a very small subset of the available Passage API endpoints.
 //!
-//! See Passage [Authentication API](https://docs.passage.id/api-docs/authentication-api) and [Management API](https://docs.passage.id/api-docs/management-api)  for all the possible endpoints that could be added to this crate in the future.
+//! See Passage [Authentication API](https://docs.passage.id/api-docs/authentication-api) and [Management API](https://docs.passage.id/api-docs/management-api) for all the possible endpoints that could be added to this crate in the future.
 //!
 //! ## Usage
 //!
-//! This crate is on [crates.io](https://crates.io/crates/passage-id) and can be used by adding `passage-id` to your dependencies in your project's Cargo.toml.
+//! This crate is published on [crates.io](https://crates.io/crates/passage-id) and can be added with `cargo add passage-id` or by manually adding `passage` to your Cargo.toml dependencies.
 //!
 //! ```toml
 //! [dependencies]
-//! passage-id = "latest"
+//! passage-id = "0.1"
 //! ```
 //!
 use jsonwebkey as jwk;
