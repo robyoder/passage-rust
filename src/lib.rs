@@ -52,6 +52,7 @@ impl Passage {
     /// Verify the Passage authentication token. When successful, the resulting `String` is the authenticated Passage user ID. See [Validation Passage JWTs](https://docs.passage.id/backend/overview/other#validation-passage-jwts) for details.
     ///
     /// ```rust
+    /// # use passage_id::Passage;
     /// // Your app id from https://console.passage.id/settings
     /// let app_id = "cHxJnV5eqc8aIrgQjgfIEsMl";
     ///
